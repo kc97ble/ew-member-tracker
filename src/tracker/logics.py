@@ -73,7 +73,7 @@ def get_background_color(ratio):
     return "hsl({}, {}%, {}%)".format((H % 1) * 360, S * 100, L * 100)
 
 
-def get_heat_map(info_list, num=400):
+def get_heat_map(info_list, num=200):
     start_time = min(map(lambda info: info["start_at"], info_list))
     ended_time = max(map(lambda info: info["ended_at"], info_list))
     step = (ended_time - start_time) / num
@@ -86,6 +86,12 @@ def get_heat_map(info_list, num=400):
             acc_time += intersection(
                 info["start_at"], info["ended_at"], start_at, ended_at, timedelta(0)
             )
+        help = "{} - {}\n{} seconds\n{}%".format(
+            start_at.strftime("%H:%M:%S"),
+            ended_at.strftime("%H:%M:%S"),
+            str(acc_time),
+            str(acc_time / step * 100),
+        )
         result.append(
             {
                 "start_at": start_at,
@@ -93,6 +99,7 @@ def get_heat_map(info_list, num=400):
                 "acc_time": acc_time,
                 "ratio": acc_time / step,
                 "background_color": get_background_color(acc_time / step),
+                "help": help,
             }
         )
     return result

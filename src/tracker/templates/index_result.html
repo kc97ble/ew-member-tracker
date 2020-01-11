@@ -17,7 +17,7 @@
   <div>
     <div class="heat-map">
       {% for heat in heat_map %}
-      <div class="heat" style="background-color: {{ heat.background_color }}">
+      <div class="heat" title="{{ heat.help }}" style="background-color: {{ heat.background_color }}">
       </div>
       {% endfor %}
     </div>
