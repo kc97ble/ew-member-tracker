@@ -1,1 +1,26 @@
-<pre>{{ debug }}</pre>
+<head>
+  <style>
+    .heat-map {
+      display: flex;
+      width: 100%;
+      height: 50px;
+      border: 1px solid black;
+    }
+
+    .heat {
+      flex-grow: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <div class="heat-map">
+      {% for heat in heat_map %}
+      <div class="heat" style="background-color: {{ heat.background_color }}">
+      </div>
+      {% endfor %}
+    </div>
+    <pre>{{ debug }}</pre>
+  </div>
+</body>

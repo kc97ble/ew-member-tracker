@@ -11,7 +11,9 @@ class IndexView(View):
 
     def post(self, request):
         dir = request.POST["dir"]
-        data = logics.get_file_list_ex(dir)
+        data = logics.get_heat_map_from_dir(dir)
         return render(
-            request, "index_result.html", {"debug": pprint.pformat(data, indent=4)},
+            request,
+            "index_result.html",
+            {"heat_map": data, "debug": pprint.pformat(data, indent=4)},
         )
