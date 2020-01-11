@@ -1,0 +1,6 @@
+<form action="/" method="POST">
+  {% csrf_token %}
+  <label for="dir-input">Dir:</label>
+  <input id="dir-input" type="text" name="dir"/>
+  <button type="submit">Submit</button>
+</form>
