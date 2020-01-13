@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-light mb-4">
+  <span class="navbar-brand mb-0 h1">EW Member Tracker</span>
+</nav>
+<div class="container">
+  <div class="card my-4">
+    <div class="card-body">
+      <form class="form" action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label>Big directory</label>
+          <input class="form-control" type="text" name="big_dir"></input>
+        </div>
+        <button class="btn btn-primary" type="submit" name="action" value="reload_big_dir">Reload big directory</button>
+      </form>
+    </div>
+  </div>
+  {% for folder in folders %}
+  <div class="card my-4">
+    <div class="card-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        <h5 class="card-title">
+          {{ folder.dir }}
+          <button class="btn btn-link" type="submit" name="action" value="generate_heat_map">Generate heat map</button>
+        </h5>
+        <input type="hidden" name="dir" value="{{ folder.dir }}"></input>
+      </form>
+      <div class="heat-map">
+        {% for heat in folder.heat_map %}
+        <div class="heat" title="{{ heat.help }}" style="background-color: {{ heat.background_color }}">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% endblock content %}
